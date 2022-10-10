@@ -23,18 +23,6 @@ on:
         description: 'DEVICE_PATH'
         required: true
         default: 'device/xiaomi/spes'
-      KERNEL_TREE_URL:
-        description: 'KERNEL_TREE_URL'
-        required: true
-        default: 'https://github.com/boedhack99/kernel_xiaomi_spes'
-      KERNEL_TREE_BRANCH:
-        description: 'KERNEL_TREE_BRANCH'
-        required: true
-        default: '12'
-      KERNEL_PATH:
-        description: 'KERNEL_PATH'
-        required: true
-        default: 'kernel/xiaomi/spes'
       COMMON_TREE_URL:
         description: 'COMMON_TREE_URL (if no common tree, leave blank)'
         required: false
@@ -67,9 +55,6 @@ jobs:
         echo "Device Tree URL: ${{ github.event.inputs.DEVICE_TREE_URL }}"
         echo "Device Tree Branch: ${{ github.event.inputs.DEVICE_TREE_BRANCH }}"
         echo "Device Path: ${{ github.event.inputs.DEVICE_PATH }}"
-        echo "Kernel Tree URL: ${{ github.event.inputs.KERNEL_TREE_URL }}"
-        echo "Kernel Tree Branch: ${{ github.event.inputs.KERNEL_TREE_BRANCH }}"
-        echo "Kernel Path: ${{ github.event.inputs.KERNEL_PATH }}"
         echo "Device Name: ${{ github.event.inputs.DEVICE_NAME }}"
         echo "Makefile Name: ${{ github.event.inputs.MAKEFILE_NAME }}"
         echo "Build Target: ${{ github.event.inputs.BUILD_TARGET }}.img"
@@ -132,11 +117,6 @@ jobs:
     - name: Clone device tree
       run: |
         git clone ${{ github.event.inputs.DEVICE_TREE_URL }} -b ${{ github.event.inputs.DEVICE_TREE_BRANCH }} ./${{ github.event.inputs.DEVICE_PATH }}
-      working-directory: ${{ steps.pwd.outputs.pwd }}
-      
-    - name: Clone kernel tree
-      run: |
-        git clone ${{ github.event.inputs.KERNEL_TREE_URL }} -b ${{ github.event.inputs.KERNEL_TREE_BRANCH }} ./${{ github.event.inputs.KERNEL_PATH }}
       working-directory: ${{ steps.pwd.outputs.pwd }}
 
     - name: Clone common tree
