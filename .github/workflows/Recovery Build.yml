@@ -14,7 +14,7 @@ on:
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
-        default: 'https://github.com/boedhack99/device_xiaomi_fog-TWRP'
+        default: 'https://github.com/imtiaz-modder/device_xiaomi_spes-TWRP'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
@@ -22,7 +22,21 @@ on:
       DEVICE_PATH:
         description: 'DEVICE_PATH'
         required: true
-        default: 'device/xiaomi/fog'
+        default: 'device/xiaomi/spes'
+      KERNEL_TREE_URL:
+        description: 'KERNEL_TREE_URL'
+        required: true
+        default: 'https://github.com/Jabiyeff/kernel_xiaomi_spes_header.git'
+      KERNEL_TREE_BRANCH:
+        description: 'KERNEL_TREE_BRANCH'
+        required: true
+        default: '12'     
+      KERNEL_PATH:
+        description: 'KERNEL_PATH'
+        required: true
+        default: 'kernel/xiaomi/spes' 
+        
+        
       COMMON_TREE_URL:
         description: 'COMMON_TREE_URL (if no common tree, leave blank)'
         required: false
@@ -32,11 +46,11 @@ on:
       DEVICE_NAME:
         description: 'DEVICE_NAME'
         required: true
-        default: 'fog'
+        default: 'spes'
       MAKEFILE_NAME:
         description: 'MAKEFILE_NAME'
         required: true
-        default: 'twrp_fog'
+        default: 'twrp_spes'
       BUILD_TARGET:
         description: 'BUILD_TARGET'
         required: true
@@ -55,6 +69,9 @@ jobs:
         echo "Device Tree URL: ${{ github.event.inputs.DEVICE_TREE_URL }}"
         echo "Device Tree Branch: ${{ github.event.inputs.DEVICE_TREE_BRANCH }}"
         echo "Device Path: ${{ github.event.inputs.DEVICE_PATH }}"
+          echo "Kernel Tree URL: ${{ github.event.inputs.KERNEL_TREE_URL }}"
+        echo "Kernel Tree Branch: ${{ github.event.inputs.KERNEL_TREE_BRANCH }}"
+        echo "Kernel Path: ${{ github.event.inputs.KERNEL_PATH }}"
         echo "Device Name: ${{ github.event.inputs.DEVICE_NAME }}"
         echo "Makefile Name: ${{ github.event.inputs.MAKEFILE_NAME }}"
         echo "Build Target: ${{ github.event.inputs.BUILD_TARGET }}.img"
@@ -105,7 +122,7 @@ jobs:
         cd workspace
         echo "::set-output name=pwd::$(pwd)"
         git config --global user.name ${{ github.repository_owner }}
-        git config --global user.email "boedhack@gmail.com"
+        git config --global user.email "saikatsaikat0197@gmail.com"
         repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
       id: pwd
           
